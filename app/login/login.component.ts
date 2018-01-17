@@ -3,11 +3,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService, AuthenticationService } from '../_services/index';
 
+// A Component marks a class as an Angular component and collects component configuration metadata.
 @Component({
+    // The module id of the module that contains the component.
+    // Needed to be able to resolve relative urls for templates and styles.
     moduleId: module.id,
+
+    // Specifies a template URL for an Angular component.
     templateUrl: 'login.component.html'
 })
 
+// The use of the OnInit interfce requires the implementation of OnInit()
 export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
