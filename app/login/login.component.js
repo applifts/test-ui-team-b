@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var index_1 = require("../_services/index");
+// A Component marks a class as an Angular component and collects component configuration metadata.
 var LoginComponent = /** @class */ (function () {
     function LoginComponent(route, router, authenticationService, alertService) {
         this.route = route;
@@ -40,9 +41,14 @@ var LoginComponent = /** @class */ (function () {
     };
     LoginComponent = __decorate([
         core_1.Component({
+            // The module id of the module that contains the component.
+            // Needed to be able to resolve relative urls for templates and styles.
             moduleId: module.id,
+            // Specifies a template URL for an Angular component.
             templateUrl: 'login.component.html'
-        }),
+        })
+        // The use of the OnInit interfce requires the implementation of OnInit()
+        ,
         __metadata("design:paramtypes", [router_1.ActivatedRoute,
             router_1.Router,
             index_1.AuthenticationService,

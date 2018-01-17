@@ -37,8 +37,8 @@ typings
 .node_repl_history
 
 # Generated files
-app/**/*.js
-app/**/*.js.map
+# app/**/*.js
+# app/**/*.js.map
 
 # VS Code settings
 .vscode
