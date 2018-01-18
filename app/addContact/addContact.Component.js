@@ -37,8 +37,8 @@ var AddContactComponent = /** @class */ (function () {
         this.contactService.create(this.model)
             .subscribe(function (data) {
             //this.router.navigate([this.returnUrl]);
-            //this.router.navigate(['/register']);
-            _this._location.back();
+            _this.router.navigate(['/home']);
+            //this._location.back();
         }, function (error) {
             //this.alertService.error(error);
             //this.alertService.error(error._body);

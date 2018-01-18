@@ -21,8 +21,10 @@ var HomeComponent = /** @class */ (function () {
         this.contactService = contactService;
         this.users = [];
         this.contacts = [];
+        this.flag = 0;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
+    ;
     HomeComponent.prototype.ngOnInit = function () {
         this.loadAllUsers();
         this.loadAllContacts();
@@ -33,7 +35,24 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.deleteUser = function (id) {
         var _this = this;
+        if (id == this.currentUser.id)
+            this.flag = 1;
         this.userService.delete(id).subscribe(function () { _this.loadAllUsers(); });
+        if (this.flag == 1) {
+            this.flag = 0;
+            this.router.navigate(['/login']);
+        }
+    };
+    HomeComponent.prototype.deleteContact = function (id) {
+        var _this = this;
+        this.contactService.delete(id).subscribe(function () { _this.loadAllContacts(); });
+    };
+    HomeComponent.prototype.maybeHide = function () {
+        if (this.contacts.length != 0) {
+            return true;
+        }
+        else
+            return false;
     };
     HomeComponent.prototype.loadAllUsers = function () {
         var _this = this;
