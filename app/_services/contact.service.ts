@@ -21,7 +21,7 @@ export class ContactService {
     }
 
     update(contact: Contact) {
-        return this.http.put(this.config.apiUrl + '/contacts/' + contact.id, contact);
+        return this.http.put(this.config.apiUrl + '/contacts' + contact.id, contact);
     }
 
     delete(id: number) {
