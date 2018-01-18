@@ -39,8 +39,8 @@ export class AddContactComponent {
             .subscribe(
                 data => {
                     //this.router.navigate([this.returnUrl]);
-                    //this.router.navigate(['/register']);
-                    this._location.back();
+                    this.router.navigate(['/home']);
+                    //this._location.back();
                 },
                 error => {
                     //this.alertService.error(error);

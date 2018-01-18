@@ -35,6 +35,17 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.userService.delete(id).subscribe(function () { _this.loadAllUsers(); });
     };
+    HomeComponent.prototype.deleteContact = function (id) {
+        var _this = this;
+        this.contactService.delete(id).subscribe(function () { _this.loadAllContacts(); });
+    };
+    HomeComponent.prototype.maybeHide = function () {
+        if (this.contacts.length != 0) {
+            return true;
+        }
+        else
+            return false;
+    };
     HomeComponent.prototype.loadAllUsers = function () {
         var _this = this;
         this.userService.getAll().subscribe(function (users) { _this.users = users; });

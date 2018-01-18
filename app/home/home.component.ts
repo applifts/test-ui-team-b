@@ -36,6 +36,18 @@ export class HomeComponent implements OnInit {
         this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
     }
 
+    deleteContact(id: number){
+        this.contactService.delete(id).subscribe(() => { this.loadAllContacts() });
+    }
+
+    maybeHide(){
+        if(this.contacts.length != 0){
+            return true;
+        }
+        else
+            return false;
+    }
+
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = <any>users; });
     }
