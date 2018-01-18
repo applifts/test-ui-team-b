@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     contacts: Contact[] = [];
-    flag: number = 0;;
+    flag: number = 0;
     //loading = false;
 
     constructor(private router: Router, private userService: UserService, private contactService: ContactService) {

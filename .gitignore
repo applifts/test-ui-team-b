@@ -46,3 +46,6 @@ typings
 # Configuration files
 app/main.*
 app/app.config.*
+
+# Non prod environments need different gitignore settings
+.gitignore
