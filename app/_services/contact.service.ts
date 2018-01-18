@@ -17,7 +17,7 @@ export class ContactService {
     }
 
     create(contact: Contact) {
-        return this.http.post(this.config.apiUrl + '/contacts/contacts', contact);
+        return this.http.post(this.config.apiUrl + '/contacts/', contact);
     }
 
     update(contact: Contact) {
