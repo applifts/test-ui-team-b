@@ -22,6 +22,7 @@ var index_4 = require("./_services/index");
 var index_5 = require("./home/index");
 var index_6 = require("./login/index");
 var index_7 = require("./register/index");
+var index_8 = require("./addContact/index");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -38,7 +39,8 @@ var AppModule = /** @class */ (function () {
                 index_1.AlertComponent,
                 index_5.HomeComponent,
                 index_6.LoginComponent,
-                index_7.RegisterComponent
+                index_7.RegisterComponent,
+                index_8.AddContactComponent
             ],
             providers: [
                 app_config_1.AppConfig,
@@ -46,6 +48,12 @@ var AppModule = /** @class */ (function () {
                 index_4.AlertService,
                 index_4.AuthenticationService,
                 index_4.UserService,
+                {
+                    provide: http_1.HTTP_INTERCEPTORS,
+                    useClass: index_3.JwtInterceptor,
+                    multi: true
+                },
+                index_4.ContactService,
                 {
                     provide: http_1.HTTP_INTERCEPTORS,
                     useClass: index_3.JwtInterceptor,
