@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common';
 
 import { AlertService, ContactService } from '../_services/index';
 
@@ -16,6 +17,7 @@ export class AddContactComponent {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        private _location: Location,
         private contactService: ContactService,
         private alertService: AlertService) { }
 
@@ -25,12 +27,20 @@ export class AddContactComponent {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
+    cancel(){
+        this._location.back();
+    }
+
     register() {
         this.loading = true;
+        //this._location.back();
+        
         this.contactService.create(this.model)
             .subscribe(
                 data => {
-                    this.router.navigate([this.returnUrl]);
+                    //this.router.navigate([this.returnUrl]);
+                    //this.router.navigate(['/register']);
+                    this._location.back();
                 },
                 error => {
                     //this.alertService.error(error);
@@ -38,5 +48,6 @@ export class AddContactComponent {
                     this.alertService.error(error.message);
                     this.loading = false;
                 });
+                
     }
 }
