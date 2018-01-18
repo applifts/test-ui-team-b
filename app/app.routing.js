@@ -11,6 +11,7 @@ var appRoutes = [
     { path: 'login', component: index_2.LoginComponent },
     { path: 'register', component: index_3.RegisterComponent },
     { path: 'addContact', component: index_4.AddContactComponent },
+    { path: 'home', component: index_1.HomeComponent },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

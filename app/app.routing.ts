@@ -11,6 +11,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'addContact', component: AddContactComponent },
+    { path: 'home', component: HomeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

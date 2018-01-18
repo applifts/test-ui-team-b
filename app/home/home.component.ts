@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     contacts: Contact[] = [];
+    flag: number = 0;
     //loading = false;
 
     constructor(private router: Router, private userService: UserService, private contactService: ContactService) {
@@ -33,7 +34,28 @@ export class HomeComponent implements OnInit {
     }
 
     deleteUser(id: number) {
+        if(id == this.currentUser.id)
+            this.flag  = 1;
+
         this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+
+        if(this.flag == 1)
+        {
+            this.flag = 0
+            this.router.navigate(['/login']);
+        }
+    }
+
+    deleteContact(id: number){
+        this.contactService.delete(id).subscribe(() => { this.loadAllContacts() });
+    }
+
+    maybeHide(){
+        if(this.contacts.length != 0){
+            return true;
+        }
+        else
+            return false;
     }
 
     private loadAllUsers() {

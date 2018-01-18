@@ -1,22 +1,63 @@
-﻿<div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}</h1>
-    <h3>All registered users:</h3>
+<style>
+        table, th , td  {
+          border: 1px solid rgb(0, 0, 0);
+          border-collapse: collapse;
+          padding: 5px;
+        }
+        table tr:nth-child(odd) {
+          background-color: #ffffff;
+        }
+        table tr:nth-child(even) {
+          background-color: #ffffff;
+        }
+        </style>
+<div class="col-md-16 col-md-offset-0">
+    <h1>Welcome, {{currentUser.firstName}}!</h1>
+    <h3 >All registered users:</h3>
     <ul>
         <li *ngFor="let user of users">
             {{user.username}} ({{user.firstName}})
             - <a (click)="deleteUser(user.id)">Delete</a>
         </li>
     </ul>
-    <p><a [routerLink]="['/login']">Logout</a></p>
-    <h3>Your contacts:</h3>
-        <li *ngFor="let contact of contacts">
-            {{contact.firstName}}
-        </li>
+    <p><button [routerLink]="['/login']" class="btn btn-primary">Logout</button></p>
+    <div>
+        <button (click)='openContactPage()' class="btn btn-primary">Add Contact</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+    <div>
+    <h3>Contacts: ({{contacts.length}})</h3>
+        <table>
+            <td style="font-weight:bold">First Name</td>
+            <td style="font-weight:bold">Last Name</td>
+            <td style="font-weight:bold">Email</td>
+            <td style="font-weight:bold">Phone Number</td>
+            <td style="font-weight:bold">Company Name</td>
+            <td style="font-weight:bold">Street Address</td>
+            <td style="font-weight:bold">City</td>
+            <td style="font-weight:bold">State</td>
+            <td style="font-weight:bold">Zip</td>
+            <td style="font-weight:bold">Skillset</td>
+            <td style="font-weight:bold">Pay Rate</td>
+            <td style="font-weight:bold">Delete Contact</td>
+            <tr *ngFor="let contact of contacts">
+                <td>{{contact.firstName}}</td>
+                <td>{{contact.lastName}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.phoneNumber}}</td>
+                <td>{{contact.companyName}}</td>
+                <td>{{contact.streetAddress}}</td>
+                <td>{{contact.city}}</td>
+                <td>{{contact.state}}</td>
+                <td>{{contact.zip}}</td>
+                <td>{{contact.skillset}}</td>
+                <td>{{contact.payRate}}</td>
+                <td><a (click)="deleteContact(contact.id)">DELETE</a></td>
+            </tr>
+        </table>
+    </div>
     <form>
-        <div>
-            <button (click)='openContactPage()' class="btn btn-primary">Add Contact</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-        </div>
+    <p></p>
     </form>
 
 </div>
