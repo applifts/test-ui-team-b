@@ -24,7 +24,6 @@ var HomeComponent = /** @class */ (function () {
         this.flag = 0;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
-    ;
     HomeComponent.prototype.ngOnInit = function () {
         this.loadAllUsers();
         this.loadAllContacts();

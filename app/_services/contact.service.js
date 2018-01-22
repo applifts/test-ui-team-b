@@ -24,10 +24,10 @@ var ContactService = /** @class */ (function () {
         return this.http.get(this.config.apiUrl + '/contacts/' + id);
     };
     ContactService.prototype.create = function (contact) {
-        return this.http.post(this.config.apiUrl + '/contacts', contact);
+        return this.http.post(this.config.apiUrl + '/contacts/contacts', contact);
     };
     ContactService.prototype.update = function (contact) {
-        return this.http.put(this.config.apiUrl + '/contacts/' + contact.id, contact);
+        return this.http.put(this.config.apiUrl + '/contacts' + contact.id, contact);
     };
     ContactService.prototype.delete = function (id) {
         return this.http.delete(this.config.apiUrl + '/contacts/' + id);

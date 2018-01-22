@@ -2,6 +2,7 @@ export class Contact {
     id: number;
     firstName: string;
     lastName: string;
+    contactType: string;
     email: string;
     phoneNumber: string;
     companyName: string;

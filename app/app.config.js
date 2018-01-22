@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AppConfig = /** @class */ (function () {
     function AppConfig() {
-        this.apiUrl = 'https://teamb-webapi.azurewebsites.net';
+        this.apiUrl = 'http://localhost:59823';
     }
     return AppConfig;
 }());

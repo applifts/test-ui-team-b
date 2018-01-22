@@ -22,17 +22,52 @@ var RegisterComponent = /** @class */ (function () {
     }
     RegisterComponent.prototype.register = function () {
         var _this = this;
-        this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(function (data) {
-            _this.alertService.success('Registration successful', true);
-            _this.router.navigate(['/login']);
-        }, function (error) {
-            //this.alertService.error(error);
-            //this.alertService.error(error._body);
-            _this.alertService.error(error.message);
-            _this.loading = false;
-        });
+        if (this.validateFields()) {
+            this.loading = true;
+            this.userService.create(this.model)
+                .subscribe(function (data) {
+                _this.alertService.success('Registration successful', true);
+                _this.router.navigate(['/login']);
+            }, function (error) {
+                //this.alertService.error(error);
+                //this.alertService.error(error._body);
+                _this.alertService.error(error.message);
+                _this.loading = false;
+            });
+        }
+    };
+    RegisterComponent.prototype.validateFields = function () {
+        var emailRegEx = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
+        var phoneNumberRegEx = /[0-9]{10}/;
+        var passwordRegEx = /[0-9a-zA-Z]{6,}/;
+        var usernameRegEx = /[0-9a-zA-Z]{3,}/;
+        var firstNameRegEx = /[A-Za-z]{2,}/;
+        var lastNameRegEx = /[A-Za-z]{2,}/;
+        if (!firstNameRegEx.test(this.model.firstName)) {
+            alert("Invalid First Name");
+            return false;
+        }
+        if (!lastNameRegEx.test(this.model.lastName)) {
+            alert("Invalid Last Name");
+            return false;
+        }
+        if (!usernameRegEx.test(this.model.username)) {
+            alert("Invalid Username");
+            return false;
+        }
+        if (!passwordRegEx.test(this.model.password)) {
+            alert("Invalid Password\nPasswords must be at least 6 characters in length and may only include alphanumeric characters");
+            return false;
+        }
+        if (!emailRegEx.test(this.model.email)) {
+            alert("Invalid Email");
+            return false;
+        }
+        if (!phoneNumberRegEx.test(this.model.phoneNumber)) {
+            alert("Invalid Phone Number\nRequired Format: xxxxxxxxxx");
+            return false;
+        }
+        return true;
     };
     RegisterComponent = __decorate([
         core_1.Component({
